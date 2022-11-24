@@ -1,19 +1,25 @@
 package com.example.newsapp.data.api
 
-import retrofit2.http.Query
+import com.example.newsapp.models.NewsResponse
+import com.example.newsapp.utils.Constants.Companion.API_KEY
+import com.example.newsapp.utils.Constants.Companion.BASE_URL
+import retrofit2.Response
 import retrofit2.http.GET
+import retrofit2.http.Query
 
 interface NewsService {
+
     @GET("/v2/everything")
-    suspend fun getEverything (
+    suspend fun getEverything(
         @Query("q") query: String,
         @Query("page") page: Int = 1,
-        @Query("apiKey") apiKey: String = "cfdce2a3efee4961a40e6bdf412f6758"
-    )
-    suspend fun getHeadlines (
-        @Query("country") countryCode: String = "ua",
+        @Query("apiKey") apiKey: String = API_KEY
+    ): Response<NewsResponse>
+
+    @GET("/v2/top-headlines")
+    suspend fun getHeadlines(
+        @Query("country") countryCode: String = "ru",
         @Query("page") page: Int = 1,
         @Query("apiKey") apiKey: String = "cfdce2a3efee4961a40e6bdf412f6758"
-    )
-
+    ): Response<NewsResponse>
 }

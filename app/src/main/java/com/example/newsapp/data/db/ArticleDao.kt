@@ -7,7 +7,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.newsapp.models.Article
 
-interface Dao {
+interface ArticleDao {
     @Query("SELECT * FROM articles")
     suspend fun getAllArticles(): LiveData<List<Article>>
 

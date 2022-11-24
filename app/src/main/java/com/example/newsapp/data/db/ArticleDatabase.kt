@@ -3,24 +3,23 @@ package com.example.newsapp.data.db
 import android.content.Context
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.newsapp.models.Article
 
-abstract class Database: RoomDatabase() {
-    abstract fun getDao(): Dao
+abstract class ArticleDatabase: RoomDatabase() {
+    abstract fun getDao(): ArticleDao
 
     companion object {
         @Volatile
-        private var instance: Database? = null
+        private var instance: ArticleDatabase? = null
         private val LOCK = Any()
 
-        operator fun invoke(context: Context) = instance?: synchronized(LOCK) {
+        operator fun invoke(context: Context) = instance ?: synchronized(LOCK) {
              instance ?: createDatabase(context).also { instance = it }
         }
 
-        private fun createDatabase(context: Context): Database {
+        private fun createDatabase(context: Context): ArticleDatabase {
             return Room.databaseBuilder(
                 context.applicationContext,
-                Database::class.java,
+                ArticleDatabase::class.java,
                 "database"
             ).build()
         }
