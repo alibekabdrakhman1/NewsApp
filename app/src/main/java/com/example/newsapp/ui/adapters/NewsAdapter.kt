@@ -7,8 +7,10 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import com.bumptech.glide.Glide
 import com.example.newsapp.R
 import com.example.newsapp.models.Article
+import kotlinx.android.synthetic.main.item_article.view.*
 
 class NewsAdapter: RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
     inner class NewsViewHolder(view: View): RecyclerView.ViewHolder(view)
@@ -30,7 +32,13 @@ class NewsAdapter: RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: NewsViewHolder, position: Int) {
-        TODO("Not yet implemented")
+        val article = differ.currentList[position]
+        holder.itemView.apply {
+            Glide.with(this).load(article.urlToImage).into(item_image)
+            item_image.clipToOutline = true
+            item_text.text = article.title
+            item_date.text = article.publishedAt
+        }
     }
 
     override fun getItemCount(): Int {
