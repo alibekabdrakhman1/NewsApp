@@ -37,11 +37,11 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initAdapter()
-        viewModel.newsLiveData.observe(viewLifecycleOwner) { responce ->
-            when(responce) {
+        viewModel.newsLiveData.observe(viewLifecycleOwner) { response ->
+            when(response) {
                 is Resource.Success -> {
                     progress_bar.visibility = View.INVISIBLE
-                    responce.data?.let {
+                    response.data?.let {
                         newsAdapter.differ.submitList(it.articles)
                     }
                 }
@@ -50,7 +50,7 @@ class MainFragment : Fragment() {
                 }
                 is Resource.Error -> {
                     progress_bar.visibility = View.INVISIBLE
-                    responce.data?.let {
+                    response.data?.let {
                         Log.e("Error","${it}")
                     }
                 }

@@ -5,6 +5,7 @@ import android.os.Build.VERSION_CODES.P
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.bumptech.glide.Glide.init
 import com.example.newsapp.data.api.NewsRepository
 import com.example.newsapp.models.NewsResponse
 import com.example.newsapp.utils.Resource
@@ -15,6 +16,7 @@ import javax.inject.Inject
 class MainViewModel @Inject constructor(private val repository: NewsRepository): ViewModel() {
 
     val newsLiveData: MutableLiveData<Resource<NewsResponse>> = MutableLiveData()
+
     var newsPage = 1
 
     init {
