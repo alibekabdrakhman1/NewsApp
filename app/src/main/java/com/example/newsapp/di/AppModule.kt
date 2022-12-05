@@ -17,7 +17,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-abstract class AppModule {
+object AppModule {
 //    object NULL_TO_EMPTY_STRING_ADAPTER {
 //        @FromJson
 //        fun fromJson(reader: JsonReader): String {

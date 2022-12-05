@@ -32,7 +32,9 @@
         android:paddingHorizontal="14dp"
         android:paddingVertical="19dp"/>
 
+
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_search"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="50dp"
@@ -44,6 +46,16 @@
         app:layout_constraintBottom_toBottomOf="parent"
         tools:itemCount="5"
         tools:listitem="@layout/item_article" />
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/progress_bar_search"
+        android:visibility="invisible"
+        style="?attr/progressBarStyle"
+        app:layout_constraintTop_toBottomOf="@id/search_input"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
