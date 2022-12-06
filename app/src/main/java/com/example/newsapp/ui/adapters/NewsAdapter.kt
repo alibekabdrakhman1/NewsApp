@@ -12,7 +12,7 @@ import com.example.newsapp.R
 import com.example.newsapp.models.Article
 import kotlinx.android.synthetic.main.item_article.view.*
 
-class NewsAdapter: RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
+class NewsAdapter : RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
     inner class NewsViewHolder(view: View): RecyclerView.ViewHolder(view)
 
     private val callback = object : DiffUtil.ItemCallback<Article>() {
@@ -41,7 +41,7 @@ class NewsAdapter: RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
     }
 
     override fun getItemCount(): Int {
-        return differ.currentList.size
+        return this.differ.currentList.size
     }
 
     private var onItemClickListener: ((Article) -> Unit)? = null

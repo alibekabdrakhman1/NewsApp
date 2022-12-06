@@ -23,59 +23,51 @@ import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class SearchFragment : Fragment() {
-
-    private var _binding: FragmentSearchBinding? = null
-    private val mBinding get() = _binding!!
-
-    private val viewModel by viewModels<SearchViewModel>()
-    lateinit var newsAdapter: NewsAdapter
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        _binding = FragmentSearchBinding.inflate(layoutInflater, container, false)
-        return mBinding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        initAdapter()
-        search_input.addTextChangedListener { text: Editable? ->
-                text?.let {
-                    if (it.toString().isNotEmpty()) {
-                        viewModel.getSearchNews(query = it.toString())
-                    }
-                }
-        }
-
-        viewModel.searchNewsLiveData.observe(viewLifecycleOwner) { response ->
-            when(response) {
-                is Resource.Success -> {
-                    progress_bar_search.visibility = View.INVISIBLE
-                    response.data?.let {
-                        newsAdapter.differ.submitList(it.articles)
-                    }
-                }
-                is Resource.Loading -> {
-                    progress_bar_search.visibility = View.VISIBLE
-                }
-                is Resource.Error -> {
-                    progress_bar_search.visibility = View.INVISIBLE
-                    response.data?.let {
-                        Log.e("Error","$it")
-                    }
-                }
-
-            }
-        }
-    }
-
-    private fun initAdapter() {
-        newsAdapter = NewsAdapter()
-        recycler_view_search.apply {
-            adapter = newsAdapter
-            layoutManager = LinearLayoutManager(activity)
-        }
-    }
+//
+//    private var _binding: FragmentSearchBinding? = null
+//    private val mBinding get() = _binding!!
+//
+//    lateinit var newsAdapter: NewsAdapter
+//
+//
+//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+//        super.onViewCreated(view, savedInstanceState)
+//        initAdapter()
+//        search_input.addTextChangedListener { text: Editable? ->
+//                text?.let {
+//                    if (it.toString().isNotEmpty()) {
+//                        viewModel.getSearchNews(query = it.toString())
+//                    }
+//                }
+//        }
+//
+//        viewModel.searchNewsLiveData.observe(viewLifecycleOwner) { response ->
+//            when(response) {
+//                is Resource.Success -> {
+//                    progress_bar_search.visibility = View.INVISIBLE
+//                    response.data?.let {
+//                        newsAdapter.differ.submitList(it.articles)
+//                    }
+//                }
+//                is Resource.Loading -> {
+//                    progress_bar_search.visibility = View.VISIBLE
+//                }
+//                is Resource.Error -> {
+//                    progress_bar_search.visibility = View.INVISIBLE
+//                    response.data?.let {
+//                        Log.e("Error","$it")
+//                    }
+//                }
+//
+//            }
+//        }
+//    }
+//
+//    private fun initAdapter() {
+//        newsAdapter = NewsAdapter()
+//        recycler_view_search.apply {
+//            adapter = newsAdapter
+//            layoutManager = LinearLayoutManager(activity)
+//        }
+//    }
 }
