@@ -22,7 +22,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = (activity as MainActivity).viewModel
         initAdapter()
-        viewModel.newsLiveData.observe(viewLifecycleOwner) { response ->
+        viewModel.mainNewsLiveData.observe(viewLifecycleOwner) { response ->
             when(response) {
                 is Resource.Success -> {
                     progress_bar.visibility = View.INVISIBLE

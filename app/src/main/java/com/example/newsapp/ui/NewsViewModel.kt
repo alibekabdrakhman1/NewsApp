@@ -8,9 +8,10 @@ import com.example.newsapp.models.NewsResponse
 import com.example.newsapp.utils.Resource
 import kotlinx.coroutines.launch
 
-class NewsViewModel(val newsRepository: NewsRepository): ViewModel() {
-    val newsLiveData: MutableLiveData<Resource<NewsResponse>> = MutableLiveData()
+class NewsViewModel(private val newsRepository: NewsRepository): ViewModel() {
+    val mainNewsLiveData: MutableLiveData<Resource<NewsResponse>> = MutableLiveData()
     var newsPage = 1
+    val searchNewsLiveData: MutableLiveData<Resource<NewsResponse>> = MutableLiveData()
 
     init {
         getNews("us")
@@ -18,14 +19,27 @@ class NewsViewModel(val newsRepository: NewsRepository): ViewModel() {
 
     private fun getNews(countryCode: String) =
         viewModelScope.launch {
-            newsLiveData.postValue(Resource.Loading())
+            mainNewsLiveData.postValue(Resource.Loading())
             val response = newsRepository.getNews(countryCode = countryCode, pageNumber = newsPage)
             if (response.isSuccessful) {
                 response.body().let { res ->
-                    newsLiveData.postValue(Resource.Success(res))
+                    mainNewsLiveData.postValue(Resource.Success(res))
                 }
             } else {
-                newsLiveData.postValue(Resource.Error(message = response.message()))
+                mainNewsLiveData.postValue(Resource.Error(message = response.message()))
+            }
+        }
+
+    fun getSearchNews(query: String) =
+        viewModelScope.launch {
+            searchNewsLiveData.postValue(Resource.Loading())
+            val response = newsRepository.getSearchNews(query = query, pageNumber = newsPage)
+            if (response.isSuccessful) {
+                response.body().let { res ->
+                    searchNewsLiveData.postValue(Resource.Success(res))
+                }
+            } else {
+                searchNewsLiveData.postValue(Resource.Error(message = response.message()))
             }
         }
 }
