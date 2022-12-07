@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.newsapp.data.api.NewsRepository
+import com.example.newsapp.models.Article
 import com.example.newsapp.models.NewsResponse
 import com.example.newsapp.utils.Resource
 import kotlinx.coroutines.launch
@@ -42,4 +43,10 @@ class NewsViewModel(private val newsRepository: NewsRepository): ViewModel() {
                 searchNewsLiveData.postValue(Resource.Error(message = response.message()))
             }
         }
+
+    fun getFavoriteNews() = newsRepository.getFavoriteNews()
+
+    fun saveNews(article: Article) = viewModelScope.launch {
+        newsRepository.saveNews(article = article)
+    }
 }

@@ -1,6 +1,7 @@
 package com.example.newsapp.data.api
 
 import com.example.newsapp.data.db.ArticleDatabase
+import com.example.newsapp.models.Article
 import javax.inject.Inject
 
 class NewsRepository (val db: ArticleDatabase) {
@@ -10,5 +11,8 @@ class NewsRepository (val db: ArticleDatabase) {
     suspend fun getSearchNews(query: String, pageNumber: Int) =
         RetrofitConnect.api.getEverything(query = query, page = pageNumber)
 
+    fun getFavoriteNews() = db.getArticleDao().getAllArticles()
+
+    suspend fun saveNews(article: Article) = db.getArticleDao().insert(article = article)
 
 }
