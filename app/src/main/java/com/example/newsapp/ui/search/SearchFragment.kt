@@ -12,6 +12,7 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.newsapp.R
 import com.example.newsapp.databinding.FragmentSearchBinding
+import com.example.newsapp.models.Article
 import com.example.newsapp.ui.MainActivity
 import com.example.newsapp.ui.NewsViewModel
 import com.example.newsapp.ui.adapters.NewsAdapter
@@ -65,7 +66,20 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
     }
 
     private fun initAdapter() {
-        newsAdapter = NewsAdapter()
+        newsAdapter = NewsAdapter(object:NewsAdapter.Listener{
+            override fun saveArticle(article: Article) {
+                viewModel.saveNews(article = article)
+            }
+
+            override fun deleteArticle(article: Article) {
+                viewModel.deleteNews(article = article)
+            }
+
+            override fun openArticle(article: Article) {
+
+            }
+
+        })
         recycler_view_search.apply {
             adapter = newsAdapter
             layoutManager = LinearLayoutManager(activity)

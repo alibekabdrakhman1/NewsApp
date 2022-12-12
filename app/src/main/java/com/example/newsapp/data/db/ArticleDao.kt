@@ -7,7 +7,6 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.newsapp.models.Article
-import retrofit2.http.DELETE
 
 
 @Dao
@@ -19,5 +18,8 @@ interface ArticleDao {
     suspend fun insert(article: Article)
 
     @Delete
-    suspend fun delete(article: Article)
+    suspend fun deleteNews(article: Article)
+
+    @Query("DELETE FROM articles")
+    suspend fun clearDb()
 }

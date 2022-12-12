@@ -15,4 +15,8 @@ class NewsRepository (val db: ArticleDatabase) {
 
     suspend fun saveNews(article: Article) = db.getArticleDao().insert(article = article)
 
+    suspend fun deleteNews(article: Article) = db.getArticleDao().deleteNews(article = article)
+
+    suspend fun clearDb() = db.getArticleDao().clearDb()
+
 }

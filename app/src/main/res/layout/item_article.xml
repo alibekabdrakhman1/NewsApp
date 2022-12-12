@@ -42,23 +42,23 @@
     </LinearLayout>
 
     <ImageView
-        android:id="@+id/icon_fav"
+        android:id="@+id/favBtn"
         android:layout_width="18dp"
         android:layout_height="18dp"
         android:layout_marginStart="12dp"
-        android:src="@drawable/fav_heart"
+        android:src="@drawable/no_fav"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/item_info"/>
     <ImageView
-        android:id="@+id/icon_share"
+        android:id="@+id/shareBtn"
         android:layout_width="18dp"
         android:layout_height="18dp"
         android:layout_marginStart="17dp"
         android:src="@drawable/share_icon"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/icon_fav"/>
+        app:layout_constraintStart_toEndOf="@id/favBtn"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
